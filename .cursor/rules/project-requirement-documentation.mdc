@@ -1,0 +1,64 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Project Requirements Document (PRD)
+
+## App Overview
+Timeline app is a web application that help to record and display timeline entries of a specific user. It help user to create timeline entry with title, media files (images or video) and short description, the purpose is to capture their memory for themself or can be shared later with their friend, family.
+
+## Techstack
+- Frontend: React, Mantine (for UI), Typescript
+- Backend: FastAPI, Supabase (for storage and database), Python
+- This is a monorepo and frontend code is located under "client" directory and backend code is located under "server" directory
+
+## Core features
+
+<ref1>
+1. Timeline listing
+  - List all timeline entries follow chronological order, lastest first
+  - Pagination for each 20 entries per page
+  - There should be a "Create new timeline" button for user to create new timeline.
+
+2. Timeline detail view
+  - When user click in a timeline entry on the listing page, it will leads to the page detail view
+  - In the detail view, user has ability to edit the entry, such as change title, description, change media
+
+2. Timeline creation
+  - When press "Create new timeline" button, it lead to a new page for user to create the entry (new page not pop up)
+  - User can input the timeline entry and submit, after that they will be redirect to the listing page
+
+</ref1>
+
+<ref2>
+
+### 1.1 See List of Available Subreddits and Add New Subreddits
+- Users see existing subreddits (e.g., "ollama", "openai") displayed as cards.
+- An "Add Reddit" button opens a modal for users to paste a subreddit URL.
+- On successful addition, a new card is displayed for the added subreddit.
+
+### 1.2 Subreddit Page
+- Clicking any subreddit card navigates to its dedicated page.
+- The page has two tabs: "Top posts" and "Themes."
+
+### 1.3 Fetch Reddit Post Data in "Top posts" Tab
+- Under "Top posts," the platform displays fetched Reddit posts from the past 24 hours (or a relevant timeframe).
+- Sorting is by highest score (upvotes).
+- Each post record includes: title, score, content (text), url, created_utc, and num_comments.
+- Data fetching leverages the RedditWarp library (see "RedditWarp Documentation" section below).
+
+### 1.4 Analyze Reddit Posts Data in "Themes" Tab
+- For each post, we send the post data to an OpenAI-based (or comparable) model to categorize them into:
+  - "Solution requests" (seeking solutions to problems)
+  - "Pain & Anger" (users expressing pain/anger)
+  - "Advice requests" (users seeking advice)
+  - "Money talk" (discussion of finances/spending)
+- The analysis processes posts concurrently for better performance.
+- In the "Themes" tab, each category is displayed as a card with a title, short description, and count of posts in that category.
+- Clicking on one of these cards opens a side panel showing all posts under that category.
+
+### 1.5 Ability to Add New Cards
+- Users can add new "theme" cards or categories.
+- After a new category is added, the categorization logic should be triggered again to also classify existing posts under the new category.
+</ref2>

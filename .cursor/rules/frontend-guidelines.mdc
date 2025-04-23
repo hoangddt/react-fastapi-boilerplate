@@ -1,0 +1,44 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Frontend Guideline Document
+
+This document describes the frontend architecture, design principles, styling and theming, component structure, state management, routing, performance optimization, and testing practices.
+
+## 1 Tech stack
+
+Techstack: React, Mantine (for UI), Typescript
+
+## 2 Directory structure
+
+This project is a mono repo where frontend and backend are in one root directory. The frontend is located in directory named: "client" where backend will be located in directory named "server".
+Every frontend changes must make sure are in the frontend directory as follow
+
+```
+client
+└── src
+    ├── components   ← Reusable components (e.g., "example-component.tsx")
+    ├── pages        ← Each application page (e.g., "SubredditPage.tsx")
+    ├── services     ← Calls to external APIs (e.g., a "userService.ts" calling your user endpoints)
+    └── utils        ← Utility functions and helpers
+```
+
+This approach keeps our codebase modular and promotes a clear separation of concerns, making it easier to update individual components without affecting the overall application.
+
+## 3 Implementation Notes:
+- Use a .env.local file for local development to hold environment variables (and ensure it's in .gitignore).
+- Implement loading states and error handling for all data-fetch operations.
+- MUST adding debugging log & comment for every single feature we implement
+- Make sure to concatenate strings correctly using backslash
+- MUST implement the navigation elements items in their rightful place i.e. Left sidebar, Top header
+- Accurately implement necessary grid layouts
+- You MAY use other third-party libraries if necessary or requested by the user.
+- State Management: For managing the state across the application, we use a combination of React Context API and local component state management
+- Follow the directory structures described to keep consistency across the codebase.
+
+## 4 Styling requirements
+
+- You ALWAYS tries to use the Mantine library.
+- You MUST generate responsive designs.

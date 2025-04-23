@@ -1,0 +1,52 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Backend Architecture
+
+This document describes the backend architecture. The design is designed to support scalability, maintainability, and optimal performance. Key elements include:
+
+## 1. Techstack
+- FastAPI, Supabase (for storage and database), Python
+
+## 2. Directory structure
+This project is a mono repo where frontend and backend are in one root directory. The frontend is located in directory named: "client" where backend will be located in directory named "server".
+Every backend changes must make sure are in the backend directory as follow
+
+```
+server
+└── src
+    └── minimal_template
+        ├── api
+        │   ├── heroes
+        │   │   ├── models.py     ← Database models
+        │   │   ├── repository.py ← Data access layer
+        │   │   ├── routes.py     ← API endpoints
+        │   │   ├── schemas.py    ← Pydantic models
+        │   │   └── service.py    ← Business logic (hero operations)
+        │   └── users
+        ├── core
+        │   ├── config.py         ← Environment & app configuration
+        │   ├── database.py       ← Database connection & sessions
+        │   ├── exceptions.py     ← Exception handling
+        │   ├── logging.py        ← Logging configuration
+        │   └── security.py       ← Authentication & security
+        ├── main.py               ← Application entry point
+        └── utils
+            └── migrations.py
+```
+
+## 3. Implementation notes:
+- Each module under "api/" organizes routes according to a domain (e.g., "heroes," "users," "reddit," etc.). Ensure the modular design that is easy to manage and scale
+- Use environment variables (via a .env file) for sensitive values such as credentials, client_id, or client_secret. Declare them in "core/config.py" and use the settings across the project
+- Log server-side errors for debugging and return user-friendly messages to the client.
+- Database Technology: We use Supabase for now for SQL database (PostgreSQL) services, make sure to abstract the database operation to a service.py file, so later we can replace it to other database if needed.
+- Follow the directory structures described to keep consistency across the codebase.
+- The API will return JSON responses that the frontend can consume unless specified otherwise
+- Ensure proper HTTP status codes and error messages to support a smooth UX on the frontend.
+- Connect FastAPI with Supabase as the database backend (this might involve using the Supabase Python client)
+
+## 4. Database Schema
+
+<provide the schema here>
