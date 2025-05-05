@@ -6,6 +6,8 @@ from minimal_template.core.logging import get_logger
 from minimal_template.api.heroes.repository import HeroRepository
 from minimal_template.api.heroes.schemas import HeroCreate, HeroResponse, HeroUpdate
 from minimal_template.api.heroes.service import HeroService
+from minimal_template.api.users.schemas import UserResponse
+from minimal_template.api.deps import get_current_user
 
 # Set up logger for this module
 logger = get_logger(__name__)
@@ -96,3 +98,13 @@ async def delete_hero(
     except Exception as e:
         logger.error(f"Failed to delete hero {hero_id}: {str(e)}")
         raise
+
+@router.get("/protected/1")
+async def protected_route(
+    current_user: UserResponse = Depends(get_current_user)
+) -> dict:
+    """Example of a protected route."""
+    return {
+        "message": "This is a protected route",
+        "user": current_user
+    }
