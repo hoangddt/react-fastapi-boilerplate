@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     """Application settings."""
 
     PROJECT_NAME: str = "Hero API"
+    RAPI_DOC_DIR: str = "src/minimal_template/extensions/rapidoc"
     DEBUG: bool = False
 
     # JWT Settings

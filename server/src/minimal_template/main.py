@@ -5,6 +5,7 @@ from minimal_template.core.config import settings
 from minimal_template.core.logging import setup_logging
 from minimal_template.api.heroes.routes import router as heroes_router
 from minimal_template.api.static_files.routes import router as static_files_router
+from minimal_template.extensions import setup_rapidoc
 
 # Set up logging configuration
 setup_logging()
@@ -25,6 +26,8 @@ app = FastAPI(
 
 app.include_router(static_files_router)
 app.include_router(heroes_router)
+
+setup_rapidoc(app)
 
 @app.get("/health")
 async def health_check():
