@@ -1,0 +1,10 @@
+version: '3'
+services:
+  dailyassistant-api:
+    image: dailyassistant-api
+    container_name: dailyassistant-api
+    ports:
+      - 8001:8000
+    env_file:
+      - ./prod.env
+    restart: always
